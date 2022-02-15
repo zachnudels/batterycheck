@@ -1,0 +1,4 @@
+launchctl unload /Users/$USER/Library/LaunchAgents/com.zach.batterycheck.plist
+sudo rm /etc/batteryCheck.scpt
+rm /Users/$USER/Library/LaunchAgents/com.zach.batterycheck.plist
+launchctl list | grep 'batterycheck'

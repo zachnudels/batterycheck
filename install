@@ -1,0 +1,6 @@
+sudo cp batteryCheck.scpt /etc
+sudo chmod +x /etc/batteryCheck.scpt 
+cp com.zach.batterycheck.plist /Users/$USER/Library/LaunchAgents
+launchctl load /Users/$USER/Library/LaunchAgents/com.zach.batterycheck.plist
+echo "Ran launchctl load"
+launchctl list | grep 'batterycheck'
