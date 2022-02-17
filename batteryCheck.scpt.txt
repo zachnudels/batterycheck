@@ -1,0 +1,11 @@
+set Cap to (do shell script "pmset -g batt | grep -Eo 'Battery Power|AC Power'")
+set Pct to (do shell script "pmset -g batt | grep -Eo '(100)%|[1-9][0-9]%|[0-9]%.%[^\"]+' | cut -d% -f1")
+if Cap = "AC Power" then
+	if Pct > 69 then
+		display notification "Battery 70% charged" with title "Unplug charger" sound name "Glass"
+	end if
+else if Cap = "Battery Power" then
+	if Pct < 21 then
+		display notification "20% Battery Remaining, plug in soon." with title "Charge battery" sound name "Sosumi"
+	end if
+end if
