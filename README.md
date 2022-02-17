@@ -10,8 +10,10 @@ Make sure install is executable with
 and run install 
 ``` ./install ```
 
+You should see the process with a code of 0. If there is no 0 or if you don't see something printed, something went wrong.
+
 To uninstall:
-Make sure clean in executable (```chmod +x clean```)
+Make sure clean in executable ```chmod +x clean```
 and run clean
 ``` ./clean ```
 
