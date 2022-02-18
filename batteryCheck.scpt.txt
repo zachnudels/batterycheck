@@ -1,11 +1,27 @@
 set Cap to (do shell script "pmset -g batt | grep -Eo 'Battery Power|AC Power'")
+do shell script "touch /Users/$USER/Library/BatteryCheck/notified"
+do shell script "touch /Users/$USER/Library/BatteryCheck/cap"
 set Pct to (do shell script "pmset -g batt | grep -Eo '(100)%|[1-9][0-9]%|[0-9]%.%[^\"]+' | cut -d% -f1")
-if Cap = "AC Power" then
-	if Pct > 69 then
-		display notification "Battery 70% charged" with title "Unplug charger" sound name "Glass"
+set LastCap to (do shell script "cat /Users/$USER/Library/BatteryCheck/cap")
+set Ntfd to (do shell script "cat /Users/$USER/Library/BatteryCheck/notified")
+if not (Ntfd = "notified") then
+	if Cap = "AC Power" then
+		if Pct > 70 then
+			display notification "Battery 70% charged" with title "Unplug charger" sound name "Glass"
+			do shell script "echo notified >> /Users/$USER/Library/BatteryCheck/notified "
+			do shell script "sed -i '' '/Battery Power/d' /Users/$USER/Library/BatteryCheck/cap"
+			do shell script "echo 'AC Power' >> /Users/$USER/Library/BatteryCheck/cap "
+		end if
+	else if Cap = "Battery Power" then
+		if Pct < 21 then
+			display notification "20% Battery Remaining, plug in soon." with title "Charge battery" sound name "Sosumi"
+			do shell script "echo notified >> /Users/$USER/Library/BatteryCheck/notified"
+			do shell script "sed -i '' '/AC Power/d' /Users/$USER/Library/BatteryCheck/cap"
+			do shell script "echo 'Battery Power' >> /Users/$USER/Library/BatteryCheck/cap "
+		end if
 	end if
-else if Cap = "Battery Power" then
-	if Pct < 21 then
-		display notification "20% Battery Remaining, plug in soon." with title "Charge battery" sound name "Sosumi"
+else
+	if not (Cap = LastCap) then
+		do shell script "sed -i '' '/notified/d' /Users/$USER/Library/BatteryCheck/notified "
 	end if
 end if

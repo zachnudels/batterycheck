@@ -1,3 +1,8 @@
+mkdir /Users/$USER/Library/BatteryCheck
+touch /Users/$USER/Library/BatteryCheck/notified
+touch /Users/$USER/Library/BatteryCheck/cap
+chmod +rw /Users/$USER/Library/BatteryCheck/cap
+chmod +rw /Users/$USER/Library/BatteryCheck/notified
 sudo cp batteryCheck.scpt /etc
 sudo chmod +x /etc/batteryCheck.scpt 
 cp com.zach.batterycheck.plist /Users/$USER/Library/LaunchAgents
