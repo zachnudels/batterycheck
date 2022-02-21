@@ -6,7 +6,7 @@ set LastCap to (do shell script "cat /Users/$USER/Library/BatteryCheck/cap")
 set Ntfd to (do shell script "cat /Users/$USER/Library/BatteryCheck/notified")
 if not (Ntfd = "notified") then
 	if Cap = "AC Power" then
-		if Pct > 70 then
+		if Pct > 80 then
 			display notification "Battery 70% charged" with title "Unplug charger" sound name "Glass"
 			do shell script "echo notified >> /Users/$USER/Library/BatteryCheck/notified "
 			do shell script "sed -i '' '/Battery Power/d' /Users/$USER/Library/BatteryCheck/cap"
