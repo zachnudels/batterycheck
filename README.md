@@ -2,7 +2,7 @@
 
 Inspired heavily from [this post](https://jmmoloney.com/blog/2019/02/06/batteryscript)
 
-The following scripts will install an agent which notifies you whenever your battery is outside of the healthy range (20% - 70%). 
+The following scripts will install an agent which notifies you whenever your battery is outside of the healthy range (20% - 80%). 
 
 To install:
 Make sure install is executable with
